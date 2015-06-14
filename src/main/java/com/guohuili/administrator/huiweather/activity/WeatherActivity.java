@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.guohuili.administrator.huiweather.R;
 import com.guohuili.administrator.huiweather.model.City;
+import com.guohuili.administrator.huiweather.service.AutoUpdateService;
 import com.guohuili.administrator.huiweather.util.HttpCallBackListener;
 import com.guohuili.administrator.huiweather.util.HttpUtil;
 import com.guohuili.administrator.huiweather.util.Utility;
@@ -154,6 +155,8 @@ public class WeatherActivity extends Activity implements View.OnClickListener{
         currentDateText.setText(prefs.getString("current_date", ""));
         weatherInfoLayout.setVisibility(View.VISIBLE);
         cityNameText.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     @Override
