@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
+import com.guohuili.administrator.huiweather.activity.ChooseAreaActivity;
 import com.guohuili.administrator.huiweather.db.HuiWeatherDB;
 import com.guohuili.administrator.huiweather.model.City;
 import com.guohuili.administrator.huiweather.model.County;
@@ -120,5 +121,17 @@ public class Utility {
         editor.putString("current_date", simpleDateFormat.format(new Date()));
         editor.commit();
 
+    }
+
+    /**
+     * 将City数据存储到SharedPreferences 文件中
+     */
+    private static void saveCityData(Context context,City city){
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        editor.putInt("id",city.getId());
+        editor.putString("city_name", city.getCityName());
+        editor.putString("city_code",city.getCityCode());
+        editor.putInt("province_id", city.getProvinceId());
+        editor.commit();
     }
 }
