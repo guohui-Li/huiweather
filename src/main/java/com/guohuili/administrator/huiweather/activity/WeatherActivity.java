@@ -179,4 +179,12 @@ public class WeatherActivity extends Activity implements View.OnClickListener{
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,ChooseAreaActivity.class);
+        intent.putExtra("from_weather_activity",true);
+        startActivity(intent);
+        finish();
+    }
 }

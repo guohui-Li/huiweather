@@ -124,14 +124,51 @@ public class Utility {
     }
 
     /**
-     * 将City数据存储到SharedPreferences 文件中
+     * 将临时City数据存储到SharedPreferences 文件中
      */
-    private static void saveCityData(Context context,City city){
+    public static void saveCityData(Context context,City city){
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        editor.putInt("id",city.getId());
-        editor.putString("city_name", city.getCityName());
-        editor.putString("city_code",city.getCityCode());
-        editor.putInt("province_id", city.getProvinceId());
+        editor.putInt("temp_city_id", city.getId());
+        editor.putString("temp_city_name", city.getCityName());
+        editor.putString("temp_city_code",city.getCityCode());
+        editor.putInt("temp_province_id", city.getProvinceId());
         editor.commit();
+    }
+
+    /**
+     * 将临时City数据从SharedPreferences 文件中取出
+     */
+    public static City getCityData(Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        int id = prefs.getInt("temp_city_id", 0);
+        String cityName = prefs.getString("temp_city_name", "");
+        String cityCode = prefs.getString("temp_city_code","");
+        int provinceId = prefs.getInt("temp_province_id", 0);
+        City city = new City(id,cityName,cityCode,provinceId);
+        return city;
+    }
+
+
+    /**
+     * 将临时Province数据存储到SharedPreferences 文件中
+     */
+    public static void saveProvinceData(Context context,Province province){
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        editor.putInt("temp_province_id", province.getId());
+        editor.putString("temp_province_name", province.getProvinceName());
+        editor.putString("temp_province_code", province.getProvinceCode());
+        editor.commit();
+    }
+
+    /**
+     * 将临时Province数据从SharedPreferences 文件中取出
+     */
+    public static Province getProvinceData(Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        int id = prefs.getInt("temp_province_id", 0);
+        String provinceName = prefs.getString("temp_province_name", "");
+        String provinceCode = prefs.getString("temp_province_code", "");
+        Province province = new Province(id,provinceName,provinceCode);
+        return province;
     }
 }
